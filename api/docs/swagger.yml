@@ -1,0 +1,92 @@
+swagger: '2.0'
+info:
+    version: "2018-07-08T06:49:13Z"
+    title: "Tictactoe"
+host: "localhost:9000"
+basePath: "/tictactoe"
+schemes:
+    -   "http"
+paths:
+    /update:
+        post:
+          description: "Updates new move for tictactoe"
+          parameters:
+            - in: body
+              name: move
+              schema:
+                type: object
+                required:
+                  - move
+                  - stepNumber
+                properties:
+                  move:
+                    type: array
+                    items:
+                      type: string
+                      example: "X | O"
+                  stepNumber:
+                    type: number
+                    example: 1
+          produces:
+              -   "application/json"
+          responses:
+              200:
+                  description: '200 Response'
+
+    /getLast:
+        get:
+            description: "Gets the last move for tictactoe"
+            produces:
+                -   "application/json"
+            responses:
+                200:
+                    description: "Consumption Document"
+                    schema:
+                        $ref: "#/definitions/Move"
+    /getmovebaseonstep:
+        get:
+            description: "Gets the move base on step number"
+            parameters:
+              - in: body
+                name: stepNumber
+                schema:
+                  type: number
+                  required:
+                    - stepNumber
+                  properties:
+                    stepNumber:
+                      type: number
+                      example: 1
+            responses:
+                204:
+                    description: "returns the move base on step number"
+                    schema:
+                        $ref: "#/definitions/Move"
+    /gotostart:
+        post:
+            description: "Reset all movement for tictactoe"
+            produces:
+                -   "application/json"
+            responses:
+                200:
+                    description: "200 ok"
+
+    /calculatewinner:
+        get:
+            description: "Calculates the winner and return the result"
+            produces:
+                -   "application/json"
+            responses:
+                200:
+                    description: "State"
+                    schema:
+                        $ref: "#/definitions/Winner"
+definitions:
+    Move:
+      type: array
+      items:
+        type: string
+        example: "X | O"
+    Winner:
+      type: string
+      example: "X | O | null"
