@@ -8,7 +8,7 @@ const tictactoeSchema = Joi.object().keys({
 });
 
 const inputStepNumberSchema = Joi.object().keys({
-  stepNumber: Joi.number().min(1).max(9).required()
+  stepNumber: Joi.number().min(0).max(9).required()
 });
 
 const updateMove = (movement) => {

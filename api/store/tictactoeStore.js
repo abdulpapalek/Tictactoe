@@ -14,7 +14,13 @@ const movement = [{
 
 const getLastMove = () => movement.slice(movement.length - 1);
 
-const saveMove = newMove => movement.push(newMove);
+const saveMove = newMove => {
+  const idx = movement.findIndex((element) => element.stepNumber === newMove.stepNumber);
+  if(idx >= 0){
+    movement[idx].move = newMove.move;
+  }
+  movement.push(newMove)
+}
 
 const getMove = step => movement.filter(move => move.stepNumber === step);
 

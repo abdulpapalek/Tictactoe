@@ -14,6 +14,7 @@ router.get("/getall", (req, res) => {
 
 router.get("/getmovebaseonstep", (req, res) => {
     const result = tictactoeService.getMoveBaseOnStepNumber(Number(req.query.step));
+    console.log(result);
     res.send(result);
 });
 

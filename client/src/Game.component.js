@@ -8,31 +8,36 @@ import Board from './Board.component';
 export default () => {
   const [next, setIsNext] = useState(false);
   const [winner, setWinner] = useState(null);
-  const [allMoves, setAllMoves] = useState([]);
+  const [steps, setSteps] = useState([0]);
   const [currentMove, setCurrentMove] = useState({
     stepNumber: 0,
     move: Array(9).fill(null)
   });
   const handleClick = async (i) => {
-    if(winner !== null) {
+    if(winner !== null || currentMove.move[i] !== null) {
       return
     }
 
     try {
       const nextMove = currentMove;
       nextMove.move[i] = next ? 'X' : 'O';
-      nextMove.stepNumber = allMoves.length;
+      nextMove.stepNumber = steps.length;
       await apiCall.updateMove(nextMove);
       setCurrentMove(nextMove);
       setIsNext(!next);
+      setSteps([...steps, nextMove.stepNumber]);
     } catch (e) {
       alert(e);
     }
   };
 
   const jumpTo = async (stepNumber) => {
+    setWinner(null);
+    if(stepNumber === 0){
+      await apiCall.goToStart();
+    }
     const move = await apiCall.getMove(stepNumber);
-    console.log(move.data);
+    setSteps(steps.slice(0,stepNumber + 1));
     setCurrentMove(move.data);
   }
 
@@ -42,9 +47,6 @@ export default () => {
     });
     const fetch = async () => {
       const winner = await apiCall.calculateWinner();
-      const moves = await apiCall.getAll();
-      setAllMoves(moves.data);
-      console.log(moves);
       if (winner.data === 'X' || winner.data === 'O') {
         setWinner(winner.data);
       }
@@ -66,12 +68,12 @@ export default () => {
         <div>{winner ? `Winner: ${winner}` : `Next player: ${(next ? 'X' : 'O')}`}</div>
         <List
           bordered
-          dataSource={allMoves}
-          renderItem={(item) => {
-            const desc = (item.stepNumber !== 0) ? `Go to move #${item.stepNumber}` : 'Go to game start';
+          dataSource={steps}
+          renderItem={(step) => {
+            const desc = (step !== 0) ? `Go to move #${step}` : 'Go to game start';
             return(
-              <List.Item>
-                <button onClick={() => jumpTo(item.stepNumber)}>{desc}</button>
+              <List.Item key={step}>
+                <button onClick={() => jumpTo(step)}>{desc}</button>
               </List.Item>
             )
           }
