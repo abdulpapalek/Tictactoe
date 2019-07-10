@@ -11,11 +11,11 @@ const calculateWinner = () => {
     [0, 4, 8],
     [2, 4, 6]
   ]
-  const squares = tictactoeStore.getLastMove();
+  const { stepNumber, move } = (tictactoeStore.getLastMove())[0];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    if ((move[a] && move[a] === move[b] && move[a] === move[c]) && stepNumber !== 0) {
+      return move[a];
     }
   }
   return null;

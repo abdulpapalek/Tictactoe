@@ -7,23 +7,29 @@
  *  }
  * ]
  */
-const movement = [];
+const movement = [{
+  stepNumber: 0,
+  move: Array(9).fill(null)
+}];
 
 const getLastMove = () => movement.slice(movement.length - 1);
 
-const saveMove = (movement) => {
-  movement.push(movement);
-};
+const saveMove = newMove => movement.push(newMove);
 
-const getMove = stepNumber => movement.filter(move => move.stepNumber === stepNumber);
+const getMove = step => movement.filter(move => move.stepNumber === step);
+
+const returnMovement = () => movement;
 
 const clearAllMove = () => {
-  while(movement.pop() !== undefined);
+  while(movement.length > 1) {
+    movement.pop();
+  }
 };
 
 module.exports = {
   getLastMove,
   saveMove,
   getMove,
-  clearAllMove
+  clearAllMove,
+  returnMovement
 };

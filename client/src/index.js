@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Game from './tictactoe.component.js';
+import Layout from './Layout.component';
 
 ReactDOM.render(
-  <Game />,
+  <Layout />,
   document.getElementById('root')
 );

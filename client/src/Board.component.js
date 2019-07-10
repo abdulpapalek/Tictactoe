@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as Styled from './tictactoe.styled'
 import { Row, Col } from 'antd';
 

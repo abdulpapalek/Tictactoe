@@ -1,28 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const tictactoeService = require('../domains/tictactoeService');
+const tictactoeService = require('../domains');
 
-router.put("/update", function(req, res) {
+router.put("/update", (req, res) => {
     const result = tictactoeService.updateMove(req.body);
     res.send(result);
 });
 
-router.get("/getLast", function(req, res) {
-    const result = tictactoeService.getLastMove();
+router.get("/getall", (req, res) => {
+    const result = tictactoeService.getAllMoves();
     res.send(result);
 });
 
-router.get("/getMoveBaseOnStep", function(req, res) {
-    const result = tictactoeService.getMoveBaseOnStepNumber(req.body);
+router.get("/getmovebaseonstep", (req, res) => {
+    const result = tictactoeService.getMoveBaseOnStepNumber(Number(req.query.step));
     res.send(result);
 });
 
-router.get("/goToStart", function(req, res) {
+router.post("/gotostart", (req, res) => {
     const result = tictactoeService.goToStart();
     res.send(result);
 });
 
-router.get("/calculateWinner", function(req, res) {
+router.get("/calculatewinner", (req, res) => {
     const result = tictactoeService.calculateWinner();
     res.send(result);
 });
