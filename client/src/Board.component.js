@@ -15,7 +15,7 @@ export default (props) => {
   };
 
   return (
-      <React.Fragment>
+    <React.Fragment>
       <Row gutter={16}>
         <Col span={8}>{renderSquare(0)}</Col>
         <Col span={8}>{renderSquare(1)}</Col>

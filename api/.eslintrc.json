@@ -1,0 +1,38 @@
+{
+  "extends": "airbnb/base",
+  "env": {
+    "browser": false,
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+    "describe": true,
+    "it": true
+  },
+  "rules": {
+    "linebreak-style": 0,
+    "prefer-destructuring": 0,
+    "complexity": ["error", 6],
+    "comma-dangle": 0,
+    "no-console": 0,
+    "no-use-before-define": 0,
+    "brace-style": ["error", "1tbs"],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": ["function", "class", "block-like"],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["cjs-export", "class"]
+      }
+    ],
+    "require-await": 2
+  },
+  "plugins": [
+    "cucumber"
+  ]
+}

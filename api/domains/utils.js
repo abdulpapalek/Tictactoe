@@ -1,5 +1,10 @@
 const tictactoeStore = require('../store');
 
+/**
+ * Calculates and returns the winner
+ *
+ * @returns {string} X | O | null
+ */
 const calculateWinner = () => {
   const lines = [
     [0, 1, 2],
@@ -10,14 +15,15 @@ const calculateWinner = () => {
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-  ]
+  ];
   const { stepNumber, move } = (tictactoeStore.getLastMove())[0];
-  for (let i = 0; i < lines.length; i++) {
+  for (let i = 0; i < lines.length; i += 1) {
     const [a, b, c] = lines[i];
     if ((move[a] && move[a] === move[b] && move[a] === move[c]) && stepNumber !== 0) {
       return move[a];
     }
   }
+
   return null;
 };
 

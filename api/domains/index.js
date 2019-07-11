@@ -1,3 +1,3 @@
 const tictactoeService = require('./tictactoeService');
 
-module.exports = tictactoeService
+module.exports = tictactoeService;

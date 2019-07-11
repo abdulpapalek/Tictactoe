@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npm run test:domains && npm run test:store",
+    "test:domains": "mocha \"./domains/**/*spec.js\" --timeout 15000",
+    "test:store": "mocha \"./store/**/*spec.js\" --timeout 15000"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,5 +20,25 @@
     "joi": "^14.3.1",
     "morgan": "~1.9.1",
     "nodemon": "^1.19.1"
-  }
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "eslint": "5.12.1",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-cucumber": "1.2.0",
+    "eslint-plugin-import": "2.14.0",
+    "mocha": "5.2.0",
+    "mocha-junit-reporter": "1.18.0",
+    "npm-audit-resolver": "1.4.0",
+    "nyc": "14.1.0",
+    "sinon": "7.2.3"
+  },
+  "engines": {
+    "node": "8.10"
+  },
+  "distIncludes": [
+    "./bin",
+    "./node_modules",
+    "./package.json"
+  ]
 }

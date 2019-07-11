@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { List, Typography } from 'antd';
+import { List } from 'antd';
 import * as Styled from './tictactoe.styled';
 import * as apiCall from './tictactoe.api';
 import Board from './Board.component';
-// import Move from './Move.component';
 
 export default () => {
   const [next, setIsNext] = useState(false);
@@ -33,6 +32,7 @@ export default () => {
 
   const jumpTo = async (stepNumber) => {
     setWinner(null);
+    setIsNext(!next);
     if(stepNumber === 0){
       await apiCall.goToStart();
     }
