@@ -14,16 +14,16 @@ const movement = [{
 
 /**
  * Game steps
- * [1,2,3]
+ * [0,1,2,3]
  */
-const steps = [];
+const steps = [0];
 
 /**
  * Returns the last move in the movement store
  *
  * @returns {object} move
  */
-const getLastMove = () => movement.slice(movement.length - 1);
+const getLastMove = () => steps.slice(steps.length - 1);
 
 /**
  * Saves a new move in the movement store
@@ -38,6 +38,7 @@ const saveMove = (newMove) => {
     movement[idx].move = newMove.move;
   }
 
+  steps.push(newMove.stepNumber);
   movement.push(newMove);
 };
 
@@ -49,10 +50,7 @@ const saveMove = (newMove) => {
  */
 const getMove = (step) => {
   const result = movement.filter(move => move.stepNumber === step);
-  if (result !== []) {
-    steps.push(step);
-  }
-
+  steps.push(step);
   return result;
 };
 
@@ -64,6 +62,10 @@ const getMove = (step) => {
 const clearAllMove = () => {
   while (movement.length > 1) {
     movement.pop();
+  }
+
+  while (steps.length > 1) {
+    steps.pop();
   }
 };
 
