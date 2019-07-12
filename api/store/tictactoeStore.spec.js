@@ -11,6 +11,7 @@ describe('tictactoeStore', () => {
       let err;
       try {
         tictactoeStore.saveMove(movement);
+        tictactoeStore.clearAllMove();
       } catch (e) {
         err = e;
       }
@@ -28,12 +29,12 @@ describe('tictactoeStore', () => {
         stepNumber: 1
       };
       tictactoeStore.saveMove(movement);
-      const result1 = tictactoeStore.getLastMove();
+      const result1 = tictactoeStore.getMove(1);
       tictactoeStore.saveMove(newMovement);
-      const result2 = tictactoeStore.getLastMove();
+      const result2 = tictactoeStore.getMove(1);
 
       expect(result1[0]).to.deep.equal(movement);
-      expect(result2[0]).to.equal(newMovement);
+      expect(result2[0]).to.deep.equal(newMovement);
     });
   });
 });

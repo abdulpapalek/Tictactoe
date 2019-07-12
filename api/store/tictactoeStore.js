@@ -36,10 +36,11 @@ const saveMove = (newMove) => {
   const idx = movement.findIndex(element => element.stepNumber === newMove.stepNumber);
   if (idx >= 0) {
     movement[idx].move = newMove.move;
+  } else {
+    movement.push(newMove);
   }
 
   steps.push(newMove.stepNumber);
-  movement.push(newMove);
 };
 
 /**
